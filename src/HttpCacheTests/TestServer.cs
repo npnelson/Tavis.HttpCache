@@ -2,23 +2,23 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
+
 
 namespace HttpCacheTests
 {
-    public static class TestServer
-    {
+    //public static class TestServer
+    //{
+     
+    //    public static HttpServer CreateServer()
+    //    {
+    //        var config = new HttpConfiguration();
+    //        config.Routes.MapHttpRoute("default", "{controller}");
+    //        config.MessageHandlers.Add(new AddDateHeader());
+    //        return new HttpServer(config);
+    //    }
 
-        public static HttpServer CreateServer()
-        {
-            var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("default", "{controller}");
-            config.MessageHandlers.Add(new AddDateHeader());
-            return new HttpServer(config);
-        }
 
-
-    }
+    //}
 
     public class AddDateHeader : DelegatingHandler
     {

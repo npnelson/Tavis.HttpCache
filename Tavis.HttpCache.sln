@@ -1,20 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCache", "src\HttpCache\HttpCache.csproj", "{5318637C-41C9-43EB-A357-DC40B00E008F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCacheTests", "src\HttpCacheTests\HttpCacheTests.csproj", "{81A0113C-44C8-44F3-B855-9FFAF5E63FC5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2AD34824-B8EF-4F06-8FA7-356A68E1FA20}"
-	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
-		build\Build.proj = build\Build.proj
-		build\Tavis.HttpCache.nuspec = build\Tavis.HttpCache.nuspec
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCache-Net40", "src\HttpCache-Net40\HttpCache-Net40.csproj", "{54DA742E-963C-4008-9E83-A6787EE270EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C32C32F-AA21-45B2-8ACA-ADB8E770C85B}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,26 +11,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavis.HttpCache", "src\HttpCache\Tavis.HttpCache.csproj", "{B7EFF4F5-DC1F-40E0-B296-49564E31FEE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tavis.HttpCache.Tests", "src\HttpCacheTests\Tavis.HttpCache.Tests.csproj", "{E9149BD0-8576-4E12-9D03-F7E3003256DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5318637C-41C9-43EB-A357-DC40B00E008F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5318637C-41C9-43EB-A357-DC40B00E008F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5318637C-41C9-43EB-A357-DC40B00E008F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5318637C-41C9-43EB-A357-DC40B00E008F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81A0113C-44C8-44F3-B855-9FFAF5E63FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81A0113C-44C8-44F3-B855-9FFAF5E63FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81A0113C-44C8-44F3-B855-9FFAF5E63FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81A0113C-44C8-44F3-B855-9FFAF5E63FC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54DA742E-963C-4008-9E83-A6787EE270EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54DA742E-963C-4008-9E83-A6787EE270EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54DA742E-963C-4008-9E83-A6787EE270EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54DA742E-963C-4008-9E83-A6787EE270EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7EFF4F5-DC1F-40E0-B296-49564E31FEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7EFF4F5-DC1F-40E0-B296-49564E31FEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7EFF4F5-DC1F-40E0-B296-49564E31FEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7EFF4F5-DC1F-40E0-B296-49564E31FEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9149BD0-8576-4E12-9D03-F7E3003256DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9149BD0-8576-4E12-9D03-F7E3003256DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9149BD0-8576-4E12-9D03-F7E3003256DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9149BD0-8576-4E12-9D03-F7E3003256DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {176BFC15-2D27-476E-BD0B-4D85E661C0ED}
 	EndGlobalSection
 EndGlobal

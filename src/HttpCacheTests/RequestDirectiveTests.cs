@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Tavis.HttpCache;
+using Tavis.HttpCache.Tests;
 using Xunit;
 
 namespace HttpCacheTests
@@ -205,7 +209,11 @@ namespace HttpCacheTests
 
         private HttpClient CreateClientWithMessageHandlerCache()
         {
-            var httpClientHandler = TestServer.CreateServer();
+            var builder = WebHost.CreateDefaultBuilder().UseStartup<Startup>();
+            var server = new TestServer(builder);
+            
+
+            var httpClientHandler = server.CreateHandler();
             
             var clientHandler = new HttpCacheHandler(httpClientHandler, new HttpCache(new InMemoryContentStore()));
             var client = new HttpClient(clientHandler) { BaseAddress = _BaseAddress };
