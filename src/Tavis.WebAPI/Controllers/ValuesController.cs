@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Tavis.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ResponseCache(Duration =300)]
+    [ResponseCache(Duration =15)]
     public class ValuesController : Controller
     {
         // GET api/values

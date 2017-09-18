@@ -58,7 +58,8 @@ namespace Tavis.HttpCache
             // If this response can be stored, then store it.
             if (_httpCache.CanStore(response))
             {
-                if (response.Content != null) await response.Content.LoadIntoBufferAsync().ConfigureAwait(false);
+                //if (response.Content != null) await response.Content.LoadIntoBufferAsync().ConfigureAwait(false);
+               
                 await _httpCache.StoreResponseAsync(response).ConfigureAwait(false);
             }
 

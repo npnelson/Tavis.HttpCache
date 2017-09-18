@@ -18,8 +18,7 @@ namespace Tavis.WebAPI
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging((hostingcontext,logging)=>logging.AddConsole())
+            WebHost.CreateDefaultBuilder(args)      
                 .UseStartup<Startup>()
                 .Build();
     }

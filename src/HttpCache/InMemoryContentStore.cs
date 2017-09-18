@@ -12,7 +12,7 @@ namespace Tavis.HttpCache
         private readonly object syncRoot = new object();
         private readonly Dictionary<CacheKey, CacheEntryContainer> _CacheContainers = new Dictionary<CacheKey, CacheEntryContainer>();
         private readonly Dictionary<Guid, HttpResponseMessage> _responseCache = new Dictionary<Guid, HttpResponseMessage>();
-        
+        private readonly Dictionary<Guid, byte[]> _responseContentCache = new Dictionary<Guid, byte[]>();
 
         public async Task<IEnumerable<CacheEntry>> GetEntriesAsync(CacheKey cacheKey)
         {
@@ -25,16 +25,22 @@ namespace Tavis.HttpCache
 
         public async Task<HttpResponseMessage> GetResponseAsync(Guid variantId)
         {
-            return await CloneResponseAsync(_responseCache[variantId]).ConfigureAwait(false);
+            return await CloneResponseAsync(_responseCache[variantId], _responseContentCache[variantId]).ConfigureAwait(false);
         }
 
         public async Task AddEntryAsync(CacheEntry entry, HttpResponseMessage response)
         {
             CacheEntryContainer cacheEntryContainer = GetOrCreateContainer(entry.Key);
+            byte[] responseContent = null;
+            if (response.Content != null)
+            {
+                 responseContent = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            }
             lock (syncRoot)
             {
                 cacheEntryContainer.Entries.Add(entry);
                 _responseCache[entry.VariantId] = response;
+                _responseContentCache[entry.VariantId] = responseContent;
             }
         }
 
@@ -42,13 +48,18 @@ namespace Tavis.HttpCache
         {
 
             CacheEntryContainer cacheEntryContainer = GetOrCreateContainer(entry.Key);
-            
+            byte[] responseContent = null;
+            if (response.Content != null)
+            {
+                responseContent = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            }
             lock (syncRoot)
             {
                 var oldentry = cacheEntryContainer.Entries.First(e => e.VariantId == entry.VariantId);
                 cacheEntryContainer.Entries.Remove(oldentry);
                 cacheEntryContainer.Entries.Add(entry);
                 _responseCache[entry.VariantId] = response;
+                _responseContentCache[entry.VariantId] = responseContent;
             }
         }
 
@@ -71,18 +82,19 @@ namespace Tavis.HttpCache
             return cacheEntryContainer;
         }
 
-        private async Task<HttpResponseMessage> CloneResponseAsync(HttpResponseMessage response)
+        private async Task<HttpResponseMessage> CloneResponseAsync(HttpResponseMessage response,byte[] content)
         {
             var newResponse = new HttpResponseMessage(response.StatusCode);
-            var ms = new MemoryStream();
+            MemoryStream ms;
 
             foreach (var v in response.Headers) newResponse.Headers.TryAddWithoutValidation(v.Key, v.Value);
 
 
-            if (response.Content != null)
+            if (content != null)
             {
-                await response.Content.CopyToAsync(ms).ConfigureAwait(false);
-                ms.Position = 0;
+                ms = new MemoryStream(content);
+               ms.Position = 0;
+
                 newResponse.Content = new StreamContent(ms);
                 foreach (var v in response.Content.Headers) newResponse.Content.Headers.TryAddWithoutValidation(v.Key, v.Value);
             }
