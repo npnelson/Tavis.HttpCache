@@ -213,3 +213,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/.vs/Tavis.HttpCache/v15/Server/sqlite3
+/.vs/Tavis.HttpCache/v15/sqlite3/db.lock
+/.vs/Tavis.HttpCache/v15/sqlite3/storage.ide-shm
+/.vs/Tavis.HttpCache/v15/sqlite3/storage.ide-wal
