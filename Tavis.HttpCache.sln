@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{2AD34824-B8EF-4F06-8FA7-356A68E1FA20}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavis.WebAPI", "src\Tavis.WebAPI\Tavis.WebAPI.csproj", "{EE014AF2-AB38-43F9-B9C5-0E53FD18465F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavis.TestHarness", "src\Tavis.TestHarness\Tavis.TestHarness.csproj", "{43B8B105-EA58-4BB3-937A-3EF82D8784BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavis.Models", "Tavis.Models\Tavis.Models.csproj", "{F5FE206F-610A-4A68-A5DD-9556D55EB88F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{43B8B105-EA58-4BB3-937A-3EF82D8784BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43B8B105-EA58-4BB3-937A-3EF82D8784BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43B8B105-EA58-4BB3-937A-3EF82D8784BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FE206F-610A-4A68-A5DD-9556D55EB88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FE206F-610A-4A68-A5DD-9556D55EB88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FE206F-610A-4A68-A5DD-9556D55EB88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FE206F-610A-4A68-A5DD-9556D55EB88F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

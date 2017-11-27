@@ -13,7 +13,10 @@ namespace Tavis.HttpCache
         public HttpCacheHandler(HttpMessageHandler innerHandler, Tavis.HttpCache.HttpCache httpCache)
         {
             _httpCache = httpCache;
-            InnerHandler = innerHandler;
+            if (innerHandler != null)
+            {
+                InnerHandler = innerHandler;
+            }
         }
 
         // Process Request and Response
@@ -39,11 +42,11 @@ namespace Tavis.HttpCache
             {
                 HttpCache.ApplyConditionalHeaders(queryResult,request);
             }
-
+            
             // Process the request as normal
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-
+            
             // If the current representation is still current, then freshen the headers
             if (response.StatusCode == HttpStatusCode.NotModified)
             {

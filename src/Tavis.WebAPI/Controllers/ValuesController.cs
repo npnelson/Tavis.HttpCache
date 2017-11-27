@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Tavis.Models;
 
 namespace Tavis.WebAPI.Controllers
 {
@@ -12,11 +14,22 @@ namespace Tavis.WebAPI.Controllers
     {
         // GET api/values
         [HttpGet]
+        [SwaggerOperation("GetTestStringValues")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
+
+        // GET api/values
+        [HttpGet]
+        [SwaggerOperation("GetTestOUs")]
+        [Route("api/values/GetTestOUs")]
+        public IEnumerable<TestOU> GetTestOUs()
+        {
+            var retval = new List<TestOU> { new TestOU { Prop1 = "11", Prop2 = "12" }, new TestOU { Prop1 = "21", Prop2 = "22" } };
+            return retval;
+        }
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)

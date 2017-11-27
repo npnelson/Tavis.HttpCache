@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Rest;
+using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Tavis.HttpCache;
+using Tavis.Test;
 
 namespace Tavis.TestHarness
 {
@@ -11,20 +14,52 @@ namespace Tavis.TestHarness
         {
            
             var httpCache = new Tavis.HttpCache.HttpCache(new InMemoryContentStore());
-            var cachingHandler = new HttpCacheHandler(new HttpClientHandler(), httpCache);
-            var client = new HttpClient(cachingHandler);
-            client.BaseAddress = new Uri("http://localhost:52837");
+              var cachingHandler = new HttpCacheHandler(null, httpCache);
+            var baseHandler = new HttpClientHandler { AutomaticDecompression = System.Net.DecompressionMethods.GZip };
+            //var cachingHandler = new TestHandler(null);
+            var client = new TestServiceClient(new BasicAuthenticationCredentials(), new HttpClientHandler { AutomaticDecompression = System.Net.DecompressionMethods.GZip },cachingHandler);
+           
+           //  var client = new TestServiceClient(new BasicAuthenticationCredentials(),new HttpClientHandler { AutomaticDecompression = System.Net.DecompressionMethods.GZip });
+          // var client = new TestServiceClient(new BasicAuthenticationCredentials());
+            client.BaseUri = new Uri("http://localhost:52837");
+         
+           
             Console.ReadLine();
-            var result = await client.GetStringAsync("api/values");
+            var response = await client.GetTestOUsAsync();
+           
             Console.WriteLine("1st req");
-            Console.ReadLine();
-            var result2 = await client.GetStringAsync("api/values");
+          //  Console.ReadLine();
+            var response2 = await client.GetTestOUsAsync();
+            // var content2 = await response.Content.ReadAsStringAsync();
             Console.WriteLine("2nd req");
-            Console.ReadLine();
+            // Console.ReadLine();
             await Task.Delay(TimeSpan.FromSeconds(30));
-            var result3 = await client.GetStringAsync("api/values");
+            var result3 = await client.GetTestOUsAsync();
             Console.WriteLine("Done");
             Console.ReadLine();
+        }
+        private static HttpRequestMessage CreateRequest()
+        {
+            var req = new HttpRequestMessage();
+            req.Method = new HttpMethod("GET");
+            req.RequestUri = new Uri("http://localhost:52837/api/values");
+            return req;
+
+        }
+    }
+
+    public class TestHandler : DelegatingHandler
+    {
+        public TestHandler(HttpMessageHandler innerHandler):base(innerHandler)
+        {
+            var temp = innerHandler; 
+        }
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {            
+            var response = await base.SendAsync(request, cancellationToken);
+            var responseString = await response.Content.ReadAsStringAsync();
+            return response;
         }
     }
 }

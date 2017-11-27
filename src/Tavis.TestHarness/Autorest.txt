@@ -1,0 +1,1 @@
+﻿Autorest -AddCredentials true -Namespace Tavis.Test -CodeGenerator Azure.CSharp -input http://localhost:52837/swagger/v1/swagger.json -SyncMethods None
